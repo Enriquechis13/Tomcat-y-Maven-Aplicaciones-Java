@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
     tomcat.vm.box = "debian/bullseye64"
     tomcat.vm.hostname = "tomcat.sistema.test"
     tomcat.vm.network "private_network", ip: "192.168.57.102"
+    tomcat.vm.synced_folder "./files", "/home/vagrant/files"
 
     # Provisión de software en la máquina virtual
     tomcat.vm.provision "shell", inline: <<-SHELL
