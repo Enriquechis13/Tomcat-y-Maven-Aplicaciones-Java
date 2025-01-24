@@ -31,6 +31,14 @@ Vagrant.configure("2") do |config|
       sudo cp /vagrant/files/context.xml /usr/share/tomcat9-admin/host-manager/META-INF/context.xml
       sudo cp /vagrant/files/context.xml /usr/share/tomcat9-admin/manager/META-INF/context.xml
 
+      mkdir -p /home/vagrant/.m2
+
+      sudo cp /home/vagrant/files/settings.xml /home/vagrant/.m2/settings.xml
+
+      mkdir -p /home/vagrant/miwebapp
+
+      sudo cp /home/vagrant/files/pom.xml /home/vagrant/miwebapp/pom.xml
+
       sudo systemctl restart tomcat9
 
       java -version
