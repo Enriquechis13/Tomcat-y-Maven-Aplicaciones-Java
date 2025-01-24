@@ -1,8 +1,6 @@
 # Tomcat-y-Maven-Aplicaciones-Java
 
-# **Instalación y Configuración de Tomcat y Maven con Vagrant**
-
-Este documento describe los pasos para configurar un entorno con **Tomcat 9 y Maven** en **Vagrant** con **Debian**, siguiendo el orden del documento original con las soluciones implementadas.
+Este documento describe los pasos para configurar un entorno con **Tomcat 9 y Maven** en **Vagrant** con **Debian**.
 
 
 ## **1. Introducción**
@@ -129,16 +127,7 @@ Para eliminar la aplicación:
 mvn tomcat7:undeploy
 ```
 
-## **6. Copiar Archivos Fuera de la VM**
-
-Usando `vagrant scp`:
-
-```bash
-vagrant scp tomcat:/home/vagrant/miwebapp/pom.xml ./files/pom.xml
-vagrant scp tomcat:/home/vagrant/.m2/settings.xml ./files/settings.xml
-```
-
-## **7. Verificación Final**
+## **6. Verificación Final**
 Verificar el estado del servicio:
 ```bash
 sudo systemctl status tomcat9
