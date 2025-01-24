@@ -127,7 +127,100 @@ Para eliminar la aplicación:
 mvn tomcat7:undeploy
 ```
 
-## **6. Verificación Final**
+## **6. Despliegue de Rock Paper Scissors en Tomcat con Vagrant**
+
+Configura y despliega la aplicación **Rock Paper Scissors**.
+
+### **Clonación del Proyecto Rock Paper Scissors**
+
+Dentro de la máquina virtual, el repositorio se clonará automáticamente. Si deseas hacerlo manualmente, usa:
+
+```sh
+cd /home/vagrant
+if [ ! -d "rock-paper-scissors" ]; then
+  git clone https://github.com/cameronmcnz/rock-paper-scissors.git
+fi
+cd rock-paper-scissors
+git checkout patch-1
+```
+
+### **Configuración de `pom.xml`**
+
+El archivo `pom.xml` de `rock-paper-scissors` se reemplazará automáticamente con la versión configurada en `files/`. Si necesitas editarlo manualmente, usa:
+
+```sh
+nano /home/vagrant/rock-paper-scissors/pom.xml
+```
+
+Asegúrate de que incluya el siguiente bloque dentro de `<build>`:
+
+```xml
+<build>
+    <finalName>rock-paper-scissors</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
+            <configuration>
+                <url>http://192.168.57.102:8080/manager/text</url>
+                <server>Tomcat</server>
+                <path>/rock-paper-scissors</path>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+### **Compilación y Despliegue en Tomcat**
+
+Una vez configurado, ejecuta los siguientes comandos dentro de la VM para compilar y desplegar la aplicación:
+
+```sh
+cd /home/vagrant/rock-paper-scissors
+mvn clean package
+mvn tomcat7:deploy
+```
+
+Para verificar que la aplicación esté funcionando, abre un navegador y accede a:
+
+http://192.168.57.102:8080/rock-paper-scissors
+
+![Imagen tomcat](img/Captura6.PNG)
+
+Si necesitas actualizar la aplicación sin eliminarla:
+
+```sh
+mvn tomcat7:redeploy
+```
+
+Para eliminarla completamente del servidor Tomcat:
+
+```sh
+mvn tomcat7:undeploy
+```
+
+### **Verificación y Depuración**
+
+Para verificar que Tomcat está corriendo correctamente, usa:
+
+```sh
+systemctl status tomcat9
+```
+
+Si hay errores en la aplicación, revisa los logs de Tomcat:
+
+```sh
+sudo journalctl -u tomcat9 --no-pager | tail -n 50
+```
+
+También puedes verificar el estado del despliegue con:
+
+```sh
+mvn tomcat7:status
+```
+
+## **7. Verificación Final**
 Verificar el estado del servicio:
 ```bash
 sudo systemctl status tomcat9

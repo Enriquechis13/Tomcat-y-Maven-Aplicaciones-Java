@@ -39,6 +39,18 @@ Vagrant.configure("2") do |config|
 
       sudo cp /home/vagrant/files/pom.xml /home/vagrant/miwebapp/pom.xml
 
+      cd /home/vagrant
+      if [ ! -d "rock-paper-scissors" ]; then
+        git clone https://github.com/cameronmcnz/rock-paper-scissors.git
+      fi
+      cd rock-paper-scissors
+      git checkout patch-1
+
+      sudo cp /home/vagrant/files/pom.xml /home/vagrant/rock-paper-scissors/pom.xml
+
+      mvn clean package
+      mvn tomcat7:deploy
+
       sudo systemctl restart tomcat9
 
       java -version
