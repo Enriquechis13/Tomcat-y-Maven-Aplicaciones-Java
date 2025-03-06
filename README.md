@@ -26,6 +26,13 @@ Verificar que el servicio está activo:
 ```bash
 sudo systemctl status tomcat9
 ```
+
+Crear grupo:
+
+```bash
+sudo groupadd tomcat9
+```
+
 Agregar usuario:
 
 ```bash
