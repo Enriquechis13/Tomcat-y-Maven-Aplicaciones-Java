@@ -57,6 +57,19 @@ Accederemos al servicio en `http://localhost:8080/`
 
 ![Imagen tomcat](img/Captura.PNG)
 
+ Para solucionarlo sustituiremos el fichero context.xml del directorio `/usr/share/tomcat9-admin/host-manager/META-INF/` por el siguiente:
+
+```bash
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiResourceLocking="false" privileged="true" >
+  <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                   sameSiteCookies="strict" />
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="\d+\.\d+\.\d+\.\d+" />
+  <Manager sessionAttributeValueClassNameFilter="java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
+</Context>
+```
+
 ## **3. Configuración de Administración**
 
 ### **Configuración de Usuarios en Tomcat**
