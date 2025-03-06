@@ -26,6 +26,11 @@ Verificar que el servicio está activo:
 ```bash
 sudo systemctl status tomcat9
 ```
+Agregar usuario:
+
+```bash
+sudo useradd -s /bin/false -g tomcat9 -d /etc/tomcat9 tomcat9
+```
 
 ![Imagen tomcat](img/Captura.PNG)
 
