@@ -39,6 +39,22 @@ Agregar usuario:
 sudo useradd -s /bin/false -g tomcat9 -d /etc/tomcat9 tomcat9
 ```
 
+Arranque y comprobación del servicio
+
+Arrancaremos el servicio tomcat9:
+
+```bash
+sudo systemctl start tomcat9
+```
+
+Comprobamos que el servicio funciona correctamente
+
+```bash
+sudo systemctl status tomcat9
+```
+
+Accederemos al servicio en `http://localhost:8080/`
+
 ![Imagen tomcat](img/Captura.PNG)
 
 ## **3. Configuración de Administración**
